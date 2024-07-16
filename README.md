@@ -1,2 +1,2 @@
-# linux_basic
-# linux_basic
+echo "heyya this is my first readme via linux"
+
