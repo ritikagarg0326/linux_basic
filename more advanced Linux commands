@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Advanced Linux Commands
+
+# Display system uptime and load (uptime)
+echo "System Uptime and Load:"
+uptime
+echo
+
+# Show detailed information about system memory (free)
+echo "Memory Usage:"
+free -h
+echo
+
+# Display disk usage statistics (du)
+echo "Disk Usage Statistics for /tmp:"
+du -sh /tmp
+echo
+
+# Search for a pattern in a file using grep (grep)
+echo "Searching for 'bash' in /etc/passwd:"
+grep bash /etc/passwd
+echo
+
+# Display the last 5 lines of a log file (tail)
+echo "Last 5 lines of /var/log/syslog:"
+tail -n 5 /var/log/syslog
+echo
+
+# Monitor file changes live using tail -f
+echo "Monitoring changes to /var/log/syslog for 5 seconds:"
+timeout 5 tail -f /var/log/syslog
+echo
+
+# Find files modified in the last 24 hours (find)
+echo "Finding files modified in the last 24 hours in /var:"
+find /var -type f -mtime -1 | head -n 5
+echo
+
+# Archive and compress a directory (tar)
+echo "Archiving and compressing /tmp into tmp_backup.tar.gz:"
+tar -czf tmp_backup.tar.gz /tmp
+echo "Backup Created: tmp_backup.tar.gz"
+echo
+
+# Display running processes and sort by memory usage (ps)
+echo "Processes sorted by memory usage:"
+ps aux --sort=-%mem | head -n 10
+echo
+
+# Display network connections and listening ports (netstat or ss)
+echo "Network connections and listening ports (ss):"
+ss -tuln
+echo
+
+# Show disk I/O statistics (iostat - requires sysstat package)
+echo "Disk I/O Statistics (iostat):"
+iostat
+echo
+
+# Show system resource usage (vmstat)
+echo "System Resource Usage (vmstat):"
+vmstat 1 5
+echo
+
+# Download a file from the internet using wget (wget)
+echo "Downloading example file using wget:"
+wget -q https://example.com -O example.html
+echo "Download complete: example.html"
+echo
+
+# List ip addresses on network interfaces (ip addr)
+echo "Listing IP addresses of network interfaces:"
+ip addr
+echo
+
+# Cleanup
+echo "Cleaning up downloaded and created files:"
+rm tmp_backup.tar.gz example.html
+echo "Done."
