@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# System Monitoring and Performance
+echo "====== System Monitoring ======"
+echo "CPU and Memory Usage:"
+top -b -n 1 | head -n 10
+echo ""
+
+echo "Disk Usage:"
+df -h
+echo ""
+
+echo "I/O Statistics:"
+iostat
+echo ""
+
+echo "Network Connections:"
+netstat -tuln
+echo ""
+
+# File and Directory Management
+echo "====== File and Directory Management ======"
+echo "Listing current directory contents:"
+ls -lh
+echo ""
+
+echo "Copying files (example: file1 to file2):"
+# Uncomment the following line to copy a file
+# cp file1.txt file2.txt
+
+echo "Changing file permissions (example: file1 to 755):"
+# Uncomment the following line to change permissions
+# chmod 755 file1.txt
+echo ""
+
+# Networking
+echo "====== Networking ======"
+echo "Testing network connectivity (ping google.com):"
+ping -c 4 google.com
+echo ""
+
+echo "Fetching data from a URL using curl:"
+# Uncomment the following line to fetch data
+# curl https://api.github.com
+echo ""
+
+# Process Management
+echo "====== Process Management ======"
+echo "Displaying running processes:"
+ps aux | head -n 10
+echo ""
+
+echo "Killing a process (example: PID 1234):"
+# Uncomment the following line to kill a process
+# kill 1234
+echo ""
+
+# Docker Commands (Assuming Docker is installed)
+echo "====== Docker Management ======"
+echo "Listing Docker containers:"
+docker ps
+echo ""
+
+echo "Listing Docker images:"
+docker images
+echo ""
+
+# Git Commands
+echo "====== Git Management ======"
+echo "Current Git status:"
+git status
+echo ""
+
+# Kubernetes Commands (Assuming kubectl is installed)
+echo "====== Kubernetes Management ======"
+echo "Listing Kubernetes pods:"
+kubectl get pods
+echo ""
+
+# Running an Ansible Playbook (Example)
+echo "====== Ansible Playbook ======"
+# Uncomment the following line to run an Ansible playbook
+# ansible-playbook playbook.yml
+echo ""
+
+# Running a Terraform Apply (Example)
+echo "====== Terraform Apply ======"
+# Uncomment the following line to apply Terraform configurations
+# terraform apply
+echo ""
+
+echo "====== Script Completed ======"
