@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# Define variables
+INVENTORY_FILE="inventory.ini"
+PLAYBOOK_FILE="playbook.yml"
+HOST="your_host_name"
+ROLE_NAME="example_role"
+USER="your_user"
+MODULE="ping"
+
+# Basic Ansible Commands
+echo "====== Basic Ansible Commands ======"
+
+# Ping a host using the ping module
+echo "Pinging host $HOST using Ansible's ping module:"
+ansible $HOST -m $MODULE -i $INVENTORY_FILE -u $USER
+echo ""
+
+# Display inventory details
+echo "Displaying inventory details:"
+ansible-inventory -i $INVENTORY_FILE --list
+echo ""
+
+# Gather facts for a host
+echo "Gathering facts for host $HOST:"
+ansible $HOST -m setup -i $INVENTORY_FILE -u $USER
+echo ""
+
+# Run a playbook
+echo "Running the Ansible playbook: $PLAYBOOK_FILE"
+ansible-playbook $PLAYBOOK_FILE -i $INVENTORY_FILE -u $USER
+echo ""
+
+# List Ansible roles
+echo "Listing available Ansible roles:"
+ansible-galaxy list
+echo ""
+
+# Install an Ansible role from Ansible Galaxy
+echo "Installing role $ROLE_NAME from Ansible Galaxy:"
+ansible-galaxy install $ROLE_NAME
+echo ""
+
+# Uninstall an Ansible role
+echo "Uninstalling role $ROLE_NAME:"
+ansible-galaxy remove $ROLE_NAME
+echo ""
+
+# Check playbook syntax
+echo "Checking playbook syntax for $PLAYBOOK_FILE:"
+ansible-playbook --syntax-check $PLAYBOOK_FILE
+echo ""
+
+# Dry run (check mode) for a playbook
+echo "Performing a dry run for $PLAYBOOK_FILE:"
+ansible-playbook --check $PLAYBOOK_FILE -i $INVENTORY_FILE -u $USER
+echo ""
+
+# Playbook with tags
+echo "Running playbook with specific tag 'example_tag':"
+ansible-playbook $PLAYBOOK_FILE --tags "example_tag" -i $INVENTORY_FILE -u $USER
+echo ""
+
+# Playbook with limit (running against specific hosts)
+echo "Running playbook on specific host $HOST:"
+ansible-playbook $PLAYBOOK_FILE --limit $HOST -i $INVENTORY_FILE -u $USER
+echo ""
+
+# Debugging tasks with verbosity
+echo "Running playbook with increased verbosity (debugging):"
+ansible-playbook $PLAYBOOK_FILE -i $INVENTORY_FILE -u $USER -vvvv
+echo ""
+
+# Ansible Vault (Encrypting a file)
+echo "Encrypting a file with Ansible Vault (example file: secrets.yml):"
+ansible-vault encrypt secrets.yml
+echo ""
+
+# Decrypting a file with Ansible Vault
+echo "Decrypting the encrypted file (secrets.yml):"
+ansible-vault decrypt secrets.yml
+echo ""
+
+# View encrypted file without decrypting
+echo "Viewing the contents of an encrypted file (secrets.yml):"
+ansible-vault view secrets.yml
+echo ""
+
+# Re-Key (change the password) for a vault-encrypted file
+echo "Re-Keying (changing the password) for the encrypted file (secrets.yml):"
+ansible-vault rekey secrets.yml
+echo ""
+
+# End of Script
+echo "====== Script Completed ======"
