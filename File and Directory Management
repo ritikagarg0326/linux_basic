@@ -1,0 +1,26 @@
+# List contents of a directory
+ls -l /var/log
+
+# Change to a different directory
+cd /etc/nginx
+
+# Copy a file to another directory
+cp /etc/nginx/nginx.conf /backup/nginx.conf.backup
+
+# Move or rename a file
+mv /var/www/index.html /var/www/index_old.html
+
+# Remove a file (force deletion)
+rm -f /var/www/html/oldfile.html
+
+# Create a new directory
+mkdir /var/www/newsite
+
+# Find all ".log" files in the /var/log directory
+find /var/log -name "*.log"
+
+# Change the permissions of a script to be executable
+chmod +x deploy.sh
+
+# Change ownership of a file to user "devops" and group "admin"
+chown devops:admin /var/www/html/index.html
