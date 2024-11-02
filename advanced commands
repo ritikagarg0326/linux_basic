@@ -1,0 +1,61 @@
+#!/bin/bash
+
+echo "Starting the all-in-one network and system diagnostics script..."
+
+# 1. Ping a range of IP addresses
+echo "Enter the IP range to ping (e.g., 192.168.1): "
+read ip_range
+echo "Pinging IPs in range $ip_range.1 to $ip_range.254..."
+for ip in $ip_range.{1..254}; do
+    ping -c 1 -W 1 $ip | grep "bytes from" &
+done
+wait
+
+echo "-------------------------------------------"
+
+# 2. Scan open ports on a target host using nmap
+echo "Enter a target IP for port scan: "
+read target_ip
+echo "Scanning open ports on $target_ip..."
+nmap -Pn -p 1-1024 $target_ip
+
+echo "-------------------------------------------"
+
+# 3. Find specific files by pattern
+echo "Enter directory to search for files (e.g., /var/log): "
+read search_dir
+echo "Finding all .log files in $search_dir..."
+find $search_dir -type f -name "*.log"
+
+echo "-------------------------------------------"
+
+# 4. Grep logs for keywords (e.g., error, warning)
+echo "Searching logs for keywords (error, warning, critical)..."
+grep -RiE "error|warning|critical" $search_dir | head -n 10
+
+echo "-------------------------------------------"
+
+# 5. Capture network packets (requires sudo)
+echo "Capturing packets on port 80 for 5 seconds (requires sudo)..."
+sudo timeout 5 tcpdump -i any port 80
+
+echo "-------------------------------------------"
+
+# 6. Show top memory-consuming processes
+echo "Top 10 memory-consuming processes:"
+ps aux --sort=-%mem | head -n 10
+
+echo "-------------------------------------------"
+
+# 7. Disk usage summary
+echo "Disk usage summary in current directory (top 5 largest directories):"
+du -h --max-depth=1 | sort -hr | head -n 5
+
+echo "-------------------------------------------"
+
+# 8. Show open network connections
+echo "Listing all open network connections:"
+lsof -i | head -n 10
+
+echo "-------------------------------------------"
+echo "Diagnostics complete!"
