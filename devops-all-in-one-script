@@ -1,0 +1,94 @@
+#!/bin/bash
+
+echo "Starting the DevOps all-in-one script..."
+
+# 1. Service Management
+echo "Checking and restarting essential services..."
+
+services=("nginx" "mysql" "docker")
+for service in "${services[@]}"; do
+    echo "Checking status of $service..."
+    systemctl is-active --quiet $service
+    if [ $? -ne 0 ]; then
+        echo "$service is not running. Attempting to restart..."
+        sudo systemctl restart $service
+    else
+        echo "$service is running."
+    fi
+done
+
+echo "-------------------------------------------"
+
+# 2. Pull Latest Code from Git
+echo "Enter the path to the Git repository (e.g., /var/www/myapp): "
+read git_repo
+cd $git_repo || exit
+echo "Pulling latest code from Git..."
+git pull origin main
+
+echo "-------------------------------------------"
+
+# 3. Sync Files Using rsync
+echo "Enter the source directory to sync: "
+read src_dir
+echo "Enter the destination directory to sync: "
+read dest_dir
+echo "Syncing files from $src_dir to $dest_dir..."
+rsync -av --delete $src_dir $dest_dir
+
+echo "-------------------------------------------"
+
+# 4. Docker Container Management
+echo "Managing Docker containers..."
+
+echo "Enter the container name to restart (e.g., my_container): "
+read container_name
+docker ps -a --filter "name=$container_name" --format '{{.Names}}' | grep -w "$container_name" &> /dev/null
+if [ $? -eq 0 ]; then
+    echo "Restarting container $container_name..."
+    docker restart $container_name
+else
+    echo "Container $container_name does not exist. Starting a new container..."
+    docker run -d --name $container_name my_image
+fi
+
+echo "-------------------------------------------"
+
+# 5. Run Ansible Playbook
+echo "Enter the path to the Ansible playbook (e.g., /path/to/playbook.yml): "
+read playbook
+echo "Enter the inventory file path (e.g., /etc/ansible/hosts): "
+read inventory
+echo "Running Ansible playbook..."
+ansible-playbook -i $inventory $playbook
+
+echo "-------------------------------------------"
+
+# 6. System Resource Monitoring
+echo "Monitoring system resources..."
+
+echo "Top 5 memory-consuming processes:"
+ps aux --sort=-%mem | head -n 5
+
+echo "-------------------------------------------"
+
+# Disk usage summary
+echo "Disk usage summary (top 5 largest directories):"
+du -h --max-depth=1 | sort -hr | head -n 5
+
+echo "-------------------------------------------"
+
+# Network connections summary
+echo "Listing all open network connections:"
+lsof -i | head -n 10
+
+echo "-------------------------------------------"
+
+# 7. Checking Log Files for Errors
+echo "Checking logs for recent errors..."
+log_dir="/var/log"
+grep -RiE "error|critical|fail" $log_dir | tail -n 10
+
+echo "-------------------------------------------"
+
+echo "DevOps script execution complete!"
