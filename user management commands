@@ -1,0 +1,11 @@
+# Replace "username" with the desired username and "groupname" with the target group.
+
+sudo useradd -m username && \
+sudo passwd username && \
+sudo usermod -aG groupname username && \
+groups username && \
+sudo usermod -L username && \
+sudo usermod -U username && \
+cat /etc/passwd | grep username && \
+sudo userdel -r username && \
+echo "User and all associated tasks completed successfully"
