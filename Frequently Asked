@@ -1,0 +1,32 @@
+pwd                 # Present working directory
+ls                  # List files
+ls -la              # List all files with permissions
+cd                  # Change directory
+mkdir project       # Create directory
+rmdir project       # Remove empty directory
+rm -rf project      # Remove directory recursively
+cp file1 file2      # Copy file
+mv file1 file2      # Move/Rename file
+touch file.txt      # Create empty file
+cat file.txt        # Display file contents
+nano file.txt       # Edit file
+vim file.txt        # Edit file
+head file.txt       # First 10 lines
+tail file.txt       # Last 10 lines
+tail -f logfile.log # Live logs
+grep "error" file.log
+find . -name "*.py"
+chmod +x script.sh
+chown user:user file.txt
+ps -ef
+top
+htop
+kill -9 PID
+df -h
+du -sh *
+free -h
+uname -a
+whoami
+hostname
+history
+clear
