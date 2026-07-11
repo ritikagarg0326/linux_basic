@@ -69,17 +69,4 @@ echo
 # kill 1234
 
 # Show disk usage (df)
-echo "Showing disk space usage:"
-df -h
-echo
 
-# Show system processes (top) - Running it for 2 seconds then exiting
-echo "Displaying system processes:"
-top -b -n 1 | head -n 10
-echo
-
-# Cleanup
-echo "Cleaning up created files and directories:"
-rm renamed_file.txt
-rmdir new_folder
-echo "Done."
