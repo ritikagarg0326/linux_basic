@@ -1,0 +1,10 @@
+ip addr
+ip route
+ss -tulnp
+netstat -tulnp
+ping google.com
+traceroute google.com
+curl http://localhost:8080
+wget https://example.com/file.zip
+dig google.com
+nslookup google.com
