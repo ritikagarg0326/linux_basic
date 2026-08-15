@@ -1,0 +1,33 @@
+# Files & directories
+ls -la
+cd
+pwd
+cat
+less
+find
+
+# Logs
+tail -f
+grep
+journalctl
+
+# System monitoring
+df -h
+du -sh
+free -h
+ps aux
+top
+
+# Services
+systemctl status
+systemctl start
+systemctl stop
+systemctl restart
+
+# Networking
+curl
+ssh
+scp
+
+# Process management
+kill
